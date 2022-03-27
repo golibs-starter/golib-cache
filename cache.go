@@ -55,3 +55,13 @@ func (c *Cache) AsyncSet(key string, value interface{}, duration time.Duration) 
 		}
 	}()
 }
+
+func (c *Cache) Get(key string) (interface{}, error) {
+	return c.cache.Get(context.Background(), key)
+}
+
+func (c *Cache) Set(key string, value interface{}, duration time.Duration) error {
+	return c.cache.Set(context.Background(), key, value, &store.Options{
+		Expiration: duration,
+	})
+}
