@@ -14,6 +14,14 @@ app.cache:
   memory:
     defaultExpiration: "30s" # 30s, 30m, 30h 
     cleanupInterval: "1s" # 1s, 1m, 1h
+  # If use redis
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    user: username
+    password: secret
+    enableTLS: true #default: false
 ```
 
 ## Usage
@@ -60,5 +68,6 @@ func (nc *NeedCache) UseRemember() {
 	value, err := nc.cache.Remember("key", 30*time.Second, func() (interface{}, error) {
 		return &Example{Data: "data"}, nil
 	})
+	data := value.(*Example).Data
 }
 ```
