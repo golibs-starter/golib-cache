@@ -25,17 +25,14 @@ func NewCache(properties *CacheProperties) (*Cache, error) {
 	}, nil
 }
 
-func (c *Cache) Exist(key string) (interface{}, bool) {
-	value, err := c.cache.Get(context.Background(), key)
-	if err != nil {
-		return value, false
-	}
-	return value, value != nil
+func (c *Cache) Exist(key string) bool {
+	_, err := c.Get(key)
+	return err == nil
 }
 
 func (c *Cache) Remember(key string, duration time.Duration, fn func() (interface{}, error)) (interface{}, error) {
-	value, exist := c.Exist(key)
-	if exist {
+	value, err := c.Get(key)
+	if err == nil {
 		return value, nil
 	}
 	v, err := fn()
@@ -57,7 +54,14 @@ func (c *Cache) AsyncSet(key string, value interface{}, duration time.Duration) 
 }
 
 func (c *Cache) Get(key string) (interface{}, error) {
-	return c.cache.Get(context.Background(), key)
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+	defer cancel()
+	value, err := c.cache.Get(ctx, key)
+	if err != nil {
+		log.Warnf("cache: get by key: %v: %v", key, err)
+		return nil, err
+	}
+	return value, nil
 }
 
 func (c *Cache) Set(key string, value interface{}, duration time.Duration) error {

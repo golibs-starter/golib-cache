@@ -22,13 +22,13 @@ func TestCache_Exist(t *testing.T) {
 	})
 	assert.Nil(t, err)
 	t.Run("Not Exist", func(t *testing.T) {
-		_, exist := cache.Exist("not_exist_key")
+		exist := cache.Exist("not_exist_key")
 		assert.False(t, exist)
 	})
 	t.Run("Exist", func(t *testing.T) {
 		err := cache.cache.Set(context.Background(), "exist_key", "value", &store.Options{Expiration: time.Minute})
 		assert.Nil(t, err)
-		_, exist := cache.Exist("exist_key")
+		exist := cache.Exist("exist_key")
 		assert.True(t, exist)
 	})
 }
