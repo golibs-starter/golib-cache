@@ -69,3 +69,7 @@ func (c *Cache) Set(key string, value interface{}, duration time.Duration) error
 		Expiration: duration,
 	})
 }
+
+func (c *Cache) Delete(key string) error {
+	return c.cache.Delete(context.Background(), key)
+}
