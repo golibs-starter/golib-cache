@@ -109,3 +109,24 @@ func TestCache_Remember(t *testing.T) {
 		assert.Equal(t, "value", value.(*Data).Value)
 	})
 }
+
+func TestCache_Delete(t *testing.T) {
+	cache, err := NewCache(&CacheProperties{
+		Driver: "memory",
+		Memory: MemoryCacheProperties{
+			DefaultExpiration: "1m",
+			CleanupInterval:   "30s",
+		},
+	})
+	assert.Nil(t, err)
+	t.Run("Delete", func(t *testing.T) {
+		setErr := cache.cache.Set(context.Background(), "delete_key", "value", &store.Options{Expiration: time.Minute})
+		assert.Nil(t, setErr)
+		beforeDelete := cache.Exist("delete_key")
+		assert.True(t, beforeDelete)
+		err := cache.Delete("delete_key")
+		assert.Nil(t, err)
+		afterDelete := cache.Exist("delete_key")
+		assert.False(t, afterDelete)
+	})
+}
