@@ -16,8 +16,8 @@ func TestCache_Exist(t *testing.T) {
 	cache, err := NewCache(&CacheProperties{
 		Driver: "memory",
 		Memory: MemoryCacheProperties{
-			DefaultExpiration: "1m",
-			CleanupInterval:   "30s",
+			DefaultExpiration: time.Minute,
+			CleanupInterval:   30 * time.Second,
 		},
 	})
 	assert.Nil(t, err)
@@ -37,8 +37,8 @@ func TestCache_Remember(t *testing.T) {
 	cache, err := NewCache(&CacheProperties{
 		Driver: "memory",
 		Memory: MemoryCacheProperties{
-			DefaultExpiration: "1m",
-			CleanupInterval:   "30s",
+			DefaultExpiration: time.Minute,
+			CleanupInterval:   30 * time.Second,
 		},
 	})
 	assert.Nil(t, err)
@@ -114,8 +114,8 @@ func TestCache_Delete(t *testing.T) {
 	cache, err := NewCache(&CacheProperties{
 		Driver: "memory",
 		Memory: MemoryCacheProperties{
-			DefaultExpiration: "1m",
-			CleanupInterval:   "30s",
+			DefaultExpiration: time.Minute,
+			CleanupInterval:   30 * time.Second,
 		},
 	})
 	assert.Nil(t, err)

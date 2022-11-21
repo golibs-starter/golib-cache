@@ -6,7 +6,6 @@ import (
 	"github.com/eko/gocache/v2/store"
 	"github.com/go-redis/redis/v8"
 	gc "github.com/patrickmn/go-cache"
-	"time"
 )
 
 func NewStore(properties *CacheProperties) (store.StoreInterface, error) {
@@ -21,15 +20,7 @@ func NewStore(properties *CacheProperties) (store.StoreInterface, error) {
 }
 
 func NewMemoryStore(properties MemoryCacheProperties) (store.StoreInterface, error) {
-	defaultExpiration, err := time.ParseDuration(properties.DefaultExpiration)
-	if err != nil {
-		return nil, fmt.Errorf("memory cache: parse default expiration: %v: %v", properties.DefaultExpiration, err)
-	}
-	cleanupInterval, err := time.ParseDuration(properties.CleanupInterval)
-	if err != nil {
-		return nil, fmt.Errorf("memory cache: parse cleanup interval: %v: %v", properties.CleanupInterval, err)
-	}
-	client := gc.New(defaultExpiration, cleanupInterval)
+	client := gc.New(properties.DefaultExpiration, properties.CleanupInterval)
 	return store.NewGoCache(client, nil), nil
 }
 
