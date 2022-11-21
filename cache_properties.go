@@ -2,6 +2,7 @@ package golibcache
 
 import (
 	"gitlab.com/golibs-starter/golib/config"
+	"time"
 )
 
 // CacheProperties represents ...
@@ -13,8 +14,8 @@ type CacheProperties struct {
 
 // MemoryCacheProperties represent memory cache properties
 type MemoryCacheProperties struct {
-	DefaultExpiration string
-	CleanupInterval   string
+	DefaultExpiration time.Duration `default:"30s"`
+	CleanupInterval   time.Duration `default:"30s"`
 }
 
 // RedisCacheProperties represents redis cache properties

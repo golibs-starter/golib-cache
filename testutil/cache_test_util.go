@@ -1,4 +1,4 @@
-package golibdataTestUtil
+package golibCacheTestUtil
 
 import (
 	golibcache "gitlab.com/golibs-starter/golib-cache"
