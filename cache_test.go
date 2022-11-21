@@ -130,3 +130,26 @@ func TestCache_Delete(t *testing.T) {
 		assert.False(t, afterDelete)
 	})
 }
+
+func TestCache_Clear(t *testing.T) {
+	cache, err := NewCache(&CacheProperties{
+		Driver: "memory",
+		Memory: MemoryCacheProperties{
+			DefaultExpiration: time.Minute,
+			CleanupInterval:   30 * time.Second,
+		},
+	})
+	assert.Nil(t, err)
+	t.Run("Clear", func(t *testing.T) {
+		setErr := cache.cache.Set(context.Background(), "first_key", "value", &store.Options{Expiration: time.Minute})
+		assert.Nil(t, setErr)
+		setErr = cache.cache.Set(context.Background(), "second_key", "value", &store.Options{Expiration: time.Minute})
+		assert.Nil(t, setErr)
+		assert.True(t, cache.Exist("first_key"))
+		assert.True(t, cache.Exist("second_key"))
+		err := cache.Clear()
+		assert.Nil(t, err)
+		assert.False(t, cache.Exist("first_key"))
+		assert.False(t, cache.Exist("second_key"))
+	})
+}
