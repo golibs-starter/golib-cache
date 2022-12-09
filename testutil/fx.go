@@ -1,9 +1,11 @@
 package golibCacheTestUtil
 
 import (
-	golibcache "gitlab.com/golibs-starter/golib-cache"
+	"gitlab.com/golibs-starter/golib-cache"
 	"go.uber.org/fx"
 )
+
+var cache *golibcache.Cache
 
 func EnableCacheTestUtil() fx.Option {
 	return fx.Invoke(func(c *golibcache.Cache) {
