@@ -58,7 +58,7 @@ func (c *Cache) Get(key string) (interface{}, error) {
 	defer cancel()
 	value, err := c.cache.Get(ctx, key)
 	if err != nil {
-		log.Warnf("cache: get by key: %v: %v", key, err)
+		log.Debugf("cache: get by key: %v: %v", key, err)
 		return nil, err
 	}
 	return value, nil
