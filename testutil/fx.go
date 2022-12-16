@@ -12,3 +12,8 @@ func EnableCacheTestUtil() fx.Option {
 		cache = c
 	})
 }
+
+// Cache return cache instance
+func Cache() *golibcache.Cache {
+	return cache
+}
