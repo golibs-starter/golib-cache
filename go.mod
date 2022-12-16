@@ -6,8 +6,8 @@ require (
 	github.com/eko/gocache/v2 v2.3.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/patrickmn/go-cache v2.1.0+incompatible
-	github.com/stretchr/testify v1.8.0
-	gitlab.com/golibs-starter/golib v0.12.3
+	github.com/stretchr/testify v1.8.1
+	gitlab.com/golibs-starter/golib v0.12.4
 	go.uber.org/fx v1.18.2
 )
 
