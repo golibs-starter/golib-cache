@@ -1,12 +1,15 @@
 # Golib Cache
 
+> **Note**
+> We are moving out from [Gitlab](https://gitlab.com/golibs-starter). All packages are now migrated to `github.com/golibs-starter/*`. Please consider updating.
+
 ## Installation
 
 ```shell
-go get gitlab.com/golibs-starter/golib-cache
+go get github.com/golibs-starter/golib-cache
 ```
 
-## Configuration 
+## Configuration
 ```yaml
 app.cache:
   driver: "memory" #support memory, redis
@@ -32,7 +35,7 @@ Register to fx container
 package bootstrap
 
 import (
-	"gitlab.com/golibs-starter/golib-cache"
+	"github.com/golibs-starter/golib-cache"
 	"go.uber.org/fx"
 )
 
@@ -47,7 +50,7 @@ Remember function will get value in the cache if exists, if not exists, it will 
 package app
 
 import (
-	"gitlab.com/golibs-starter/golib-cache"
+	"github.com/golibs-starter/golib-cache"
 	"time"
 )
 

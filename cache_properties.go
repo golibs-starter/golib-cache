@@ -1,7 +1,7 @@
 package golibcache
 
 import (
-	"gitlab.com/golibs-starter/golib/config"
+	"github.com/golibs-starter/golib/config"
 	"time"
 )
 

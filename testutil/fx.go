@@ -1,7 +1,7 @@
 package golibCacheTestUtil
 
 import (
-	"gitlab.com/golibs-starter/golib-cache"
+	golibcache "github.com/golibs-starter/golib-cache"
 	"go.uber.org/fx"
 )
 

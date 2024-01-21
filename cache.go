@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/eko/gocache/v2/cache"
 	"github.com/eko/gocache/v2/store"
-	"gitlab.com/golibs-starter/golib/log"
+	"github.com/golibs-starter/golib/log"
 	"time"
 )
 
